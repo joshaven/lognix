@@ -1,5 +1,6 @@
 # A log viewer for Linux, Mac, etc.
 Developer: [Joshaven Potter](mailto:yourtech@gmail.com)
+Screenshot: [view lognix in action](http://skitch.com/joshaven/dqbnh/log-viewer)
 
 # State of this project
 Functional, but unfinished.
