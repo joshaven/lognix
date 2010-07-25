@@ -5,7 +5,7 @@ var express = require('express'),
     fs      = require('fs'),
     sys     = require('sys'),
     file    = '/var/log/install.log',
-    app     = express.createServer(),
+    app     = express.createServer();
   
 
 // Listen for requests
