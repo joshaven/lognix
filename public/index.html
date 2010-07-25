@@ -7,13 +7,15 @@
     <script src="/public/jquery-1.4.2.min.js" type="text/javascript"></script>
     <script src="/public/scripts.js" type="text/javascript"></script>
     <link href="/public/screen.css" media="screen" rel="stylesheet" type="text/css" />
-    <script>$(document).ready(function(){ list_files(); });</script>
   </head>
   <body>
-    <div id="title"><h1>Log Viewer - /var/log/postfix/error.log</h1></div>
-    <div id="toc">Loading...
-      <ul><li>&nbsp;</li></ul>
-      </div>
+    <div id="title"><h1>Log Viewer</h1>
+      <form action="#">
+        <label>Find</label><input id='find'/>
+        <label>Mask</label><input id='mask'/>
+      </form>
+    </div>
+    <div id="toc">Loading...<ul><li>&nbsp;</li></ul></div>
     <div id="main">Loading...</div>
   </body>
 </html>

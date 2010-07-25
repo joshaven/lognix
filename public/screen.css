@@ -17,17 +17,37 @@ div#title h1 {
   font-size: 2em;
 }
 
+div#title form {
+  position: absolute;  
+  top: 1em;
+  right: 1em;
+}
+
+div#title label {
+  margin-right: 0.2em;
+  margin-left: 1em;
+/*  font-size: 1.2em;*/
+}
+
+div#title input {
+  width: 25em;
+  height: 1.5em;
+  padding: 1px 2px;
+  color: green;
+}
+
+
+
 div#toc {
   position: absolute;
-  left: 0;
-  top: 4em;
-  width: 12em;
+  left:   0;
+  top:    4em;
+  bottom: 0.5em;
+  width:  12em;
   font-size: 0.8em;
-  line-height: 1.5em;
+  line-height: 1.7em;
   color: white; 
   overflow: auto;
-  /* This causes a text indent on lines after the first line */
-
   padding-left: 1em; text-indent: -1em; 
 }
 
@@ -36,17 +56,25 @@ div#toc ul {
   list-style-type: none;
 }
 
+div#toc a:visited {text-decoration: none; color: white;}
+div#toc a:link {text-decoration: none; color: white;}
+div#toc a:active {text-decoration: none;color: blue;}
+
+
 
 div#main {
   position: absolute;
-  top:  4em;
-  left: 12em;
-  right:0;
+  top:    4em;
+  left:   12em;
+  right:  0.5em;
+  bottom: 0.5em;
   min-height: 75%;
 
   background-color: #ddd;
   border: 3px solid #333;
-  padding: 3px;
+  padding: 4px;
+  
+  overflow: auto;
 }
 
 .wrap_floats:after, .float_container:after, .clear_after:after {
