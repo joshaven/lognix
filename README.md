@@ -1,6 +1,9 @@
 # A log viewer for Linux, Mac, etc.
-Developer: [Joshaven Potter](mailto:yourtech@gmail.com)
-Screenshot: [view lognix in action](http://skitch.com/joshaven/dqbnh/log-viewer)
+Written nearly entirely in JavaScript... except the little bit of HTML & CSS that is in the public folder.
+
+Contact the Developer: [Joshaven Potter](mailto:yourtech@gmail.com)
+
+View a Screenshot: [view lognix in action](http://skitch.com/joshaven/dqbnh/log-viewer)
 
 # State of this project
 Functional, but unfinished.
@@ -35,4 +38,5 @@ Functional, but unfinished.
     
 ## TODO
 * Improve log file searching (limit the log entries to only matching entries)
-* Make logs maskable (eliminate garbage based upon a user entered maks)
+* Make logs maskable (eliminate garbage based upon a user entered masks)
+* Ensure that headers have proper expiration dates

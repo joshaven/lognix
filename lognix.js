@@ -24,6 +24,7 @@ app.get('/public/*.*', function(req, res){
   console.log(' --> '+req.method+'(HTTP/'+req.httpVersion+') "'+req.url+'" <'+req_type+'>');
 // TODO: Implement or confirm that TTL's are already implemented...
 //    response['Expires'] = [(Time.now + 20*60).httpdate]  
+// TODO: Change IO to non-blocking method
   res.send(fs.readFileSync('.'+req.url, 'utf8'));
 });
 
