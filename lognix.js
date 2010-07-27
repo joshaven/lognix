@@ -13,9 +13,11 @@ app.listen(3000);
 console.log('Server running at http://127.0.0.1:3000');
 
 // Default URL
-app.get('/', function(req, res){
-  console.log('Redirecting to: /public/index.html');
-  res.redirect('/public/index.html');  
+app.get('/(index.html?)?', function(req, res){
+    var url='/public/index.html',
+        req_type = res.contentType(url);
+    console.log(' --> '+req.method+'(HTTP/'+req.httpVersion+') "'+req.url+'" <'+req_type+'>');
+    res.send(fs.readFileSync('.'+url, 'utf8'));  
 });
 
 // Respond to any files in the public folder
