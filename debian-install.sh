@@ -90,7 +90,7 @@ case "\$1" in
     echo -n "Stopping \$DESC: "
     start-stop-daemon --stop --quiet --pidfile /var/run/\$NAME.pid \
       --exec \$DAEMON || true
-    orphanedPid=$(ps -A |grep node|awk '{print $1}')
+    orphanedPid=\$(ps -A |grep node|awk '{print \$1}')
     if [ -n "\$orphanedPid" ]; then kill -9 "\$orphanedPid";fi
     echo "\$NAME."
     ;;
@@ -99,7 +99,7 @@ case "\$1" in
     echo -n "Stopping \$DESC: "
     start-stop-daemon --stop --quiet --pidfile /var/run/\$NAME.pid \
       --exec \$DAEMON || true
-    orphanedPid=$(ps -A |grep node|awk '{print $1}')
+    orphanedPid=\$(ps -A |grep node|awk '{print \$1}')
     if [ -n "\$orphanedPid" ]; then kill -9 "\$orphanedPid";fi
     #Start
     echo "\$NAME."

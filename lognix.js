@@ -5,11 +5,17 @@ var express = require('express'),
     fs      = require('fs'),
     sys     = require('sys'),
     file    = '/var/log/install.log',
-    app     = express.createServer();
+    app     = express.createServer(),
+    srcPath = '/Users/joshaven/projects/lognix/'; //'/usr/lib/lognix/';
   
+// TODO: fix this srcPath, it should be the path of this file... 
+process.chdir(srcPath)
+
 
 // Listen for requests
 app.listen(3000);
+
+
 console.log('Server running at http://127.0.0.1:3000');
 
 // Default URL
