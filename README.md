@@ -10,7 +10,7 @@ View a Screenshot: [view lognix in action](http://img.skitch.com/20100727-mqgmj7
 
 If you are running Debian, Ubuntu or compatible then you should be able to simply check this project out and run: 
 
-    git clong git://github.com/joshaven/lognix.git && cd lognix
+    git clone git://github.com/joshaven/lognix.git && cd lognix
     sudo ./debian-install
 
 Otherwise here are the instructions:
