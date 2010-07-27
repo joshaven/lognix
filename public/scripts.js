@@ -17,21 +17,13 @@ $(document).ready(function(){
 function populate_toc() {
   $('#toc').html('<ul></ul>');
   // Ask the server for all avilable log files
-  $.get('/logs', function(data) {
-    $.each(onlyLogFiles(data.split(/\s/)), function(i,v) {
-      // Add an empty list item to the unordered list
-      $("<li></li>").appendTo($('#toc ul')).appendTo($('#toc ul'));
-      // Append the li with a link to the log file
-      $('<a href="#"></a>').text(v).attr('onclick', "loadDiv('/log/"+v+".json', '#main');").appendTo($('#toc ul li:last'));
+  $.get('/logs', function(data_str) {
+    $.each(data_str.split(/\s/), function(i,v){ 
+      if(v.match(/\.log$/)) { 
+        $('<li>'+v+'</li>').click( function(){ loadDiv('/log/'+v+'.json', '#main'); return false}).appendTo($('#toc ul'))
+      }; 
     });
   });
-};
-
-// parse the return files to show only the log files, removes the compressed log files
-function onlyLogFiles(array) {
-  var myReturn=[];
-  for (i in array ) { if(array[i].match(/\.log$/)) { myReturn[myReturn.length] = array[i] } };
-  return myReturn;
 };
 
 // convenience method to be called when a log file is clicked on
