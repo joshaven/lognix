@@ -2,6 +2,7 @@
 * Improve log file searching (limit the log entries to only matching entries)
 * Make logs maskable (eliminate garbage based upon a user entered masks)
 * Ensure that headers have proper expiration dates, not resending all files on every reload
+* Add Authentication
 
 ## Consider
 * Branding: (log|conf)nix
