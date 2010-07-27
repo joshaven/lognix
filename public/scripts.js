@@ -10,7 +10,7 @@ $(document).ready(function(){
   
   $('#main').text('');
   $('#main').attr('onclick', 'hideMenu()');
-  // $('#toc').hoverIntent(function(){showMenu();}, function(){hideMenu();});
+  $('#toc').hoverIntent(function(){showMenu();}, function(){hideMenu();});
 });
 
 // makes a list of avilable log files
