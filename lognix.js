@@ -5,14 +5,12 @@ var express = require('express'),
     fs      = require('fs'),
     sys     = require('sys'),
     file    = '/var/log/install.log',
-    app     = express.createServer(),
-    daemon = require("./daemon");
+    app     = express.createServer();
   
 
 // Listen for requests
 app.listen(3000);
-// console.log('Server running at http://127.0.0.1:3000');
-daemon.start();
+console.log('Server running at http://127.0.0.1:3000');
 
 // Default URL
 app.get('/(index.html?)?', function(req, res){
