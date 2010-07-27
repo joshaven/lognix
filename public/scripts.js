@@ -5,12 +5,12 @@ $(document).ready(function(){
   $('#find').keypress(function(event) { if (event.keyCode == '13') { findElements($('#find').val()); }; });
 
   $('#mask').keypress(function(event) {
-    if (event.keyCode == '13') { alert('Handler for "mask" is not complete.'); };
+    if (event.keyCode == '13') { maskElements($('#find').val()); };
   });
   
   $('#main').text('');
   $('#main').attr('onclick', 'hideMenu()');
-  $('#toc').hoverIntent(function(){showMenu();}, function(){hideMenu();});
+  // $('#toc').hoverIntent(function(){showMenu();}, function(){hideMenu();});
 });
 
 // makes a list of avilable log files
@@ -20,7 +20,12 @@ function populate_toc() {
   $.get('/logs', function(data_str) {
     $.each(data_str.split(/\s/), function(i,v){ 
       if(v.match(/\.log$/)) { 
-        $('<li>'+v+'</li>').click( function(){ loadDiv('/log/'+v+'.json', '#main'); return false}).appendTo($('#toc ul'))
+        $('<li>'+v+'</li>').click( function(){ 
+          loadDiv('/log/'+v+'.json', '#main'); 
+          $('#toc li').removeClass('selected')
+          $(this).addClass('selected');
+          return false
+        }).appendTo($('#toc ul'))
       }; 
     });
   });
@@ -44,8 +49,22 @@ function showMenu() {
   $('#main').animate({left: '12em'}, 300)
 }
 
-function findElements(matchData) {
+function findElements(matchData ) {
   $('#main p').each( function(i, el){
-    if($(el).text().match(matchData)) {$(el).show();} else {$(el).hide();}
+    if($(el).text().match(new RegExp(matchData, "i"))) {$(el).show();} else {$(el).hide();}
   });
 };
+
+function maskElements(matchData) {
+  var mask = $('#mask').val(), 
+      reg = new RegExp(mask, "g");  
+
+  $('#main p').each(function(i,el) {
+    // Remove old masks
+    var el=$(el);
+    if(el.attr('class').match('masked')) { el.text(el.data('original_text')).removeClass('masked'); };
+    // Apply new mask
+    var text=el.text();
+    if(mask.length>0) { if(text.match(reg)) { el.data('original_text', text).addClass('masked').text(text.split(reg).join('')) }; };
+  });
+}

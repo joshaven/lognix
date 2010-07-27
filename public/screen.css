@@ -60,6 +60,13 @@ div#toc ul li {
   cursor: pointer
 }
 
+div#toc ul li.selected {
+  cursor: pointer;
+  padding-left: 0.5em;
+  font-weight: bold;
+  font-size: 1.2em;
+  list-style-type: square;
+}
 
 
 div#main {
@@ -80,6 +87,7 @@ div#main {
 div#main p {
   margin-top:     0;
   margin-bottom:  3px;
+  padding-left: 1em; text-indent: -1em; 
 }
 
 div#main p:hover {
