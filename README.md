@@ -6,7 +6,7 @@ Contact the Developer: [Joshaven Potter](mailto:yourtech@gmail.com)
 View a Screenshot: [view lognix in action](http://skitch.com/joshaven/dqbnh/log-viewer)
 
 # State of this project
-Functional, but unfinished.
+Functional, but not yet fully featured.
 
 ## Installation
     
@@ -35,8 +35,3 @@ Functional, but unfinished.
     # Try lognix
     # brows to your ip followed by port 3000   http://127.0.0.1:3000
     # enjoy
-    
-## TODO
-* Improve log file searching (limit the log entries to only matching entries)
-* Make logs maskable (eliminate garbage based upon a user entered masks)
-* Ensure that headers have proper expiration dates
