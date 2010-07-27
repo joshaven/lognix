@@ -30,15 +30,28 @@ app.get('/public/*.*', function(req, res){
 
 // View log file
 // TODO: The new line chars are lost... need to do some type of markup
-app.get('/log/*.log', function(req, res){
-  var req_type = res.contentType('.'+req.url);
+app.get('/log/*.log', function(req, res, params){
+  var path = '/var'+req.url,
+      data = fs.readFileSync(path, 'utf8')
+      req_type = res.contentType(data);
   console.log(' --> '+req.method+'(HTTP/'+req.httpVersion+') "'+req.url+'" <'+req_type+'>');
-  res.send( fs.readFileSync('/var'+req.url, 'utf8') );
+  res.send( data );
 });
+
+// View log file
+// TODO: The new line chars are lost... need to do some type of markup
+app.get('/log/*.log.json', function(req, res, params){
+  var path = '/var'+req.url.split(/\.json/i)[0],
+      data = fs.readFileSync(path, 'utf8').split('\n')
+      req_type = res.contentType({test:true});
+  console.log(' --> '+req.method+'(HTTP/'+req.httpVersion+') "'+req.url+'" <'+req_type+'>');
+  res.send( data );
+});
+
+
 
 // List avilable log files
 app.get('/logs', function(req, res){
-  console.log('found /logs')
   var sys   = require('sys'),
       spawn = require('child_process').spawn,
       ls    = spawn('ls', ['/var/log']);
@@ -52,10 +65,5 @@ app.get('/logs', function(req, res){
   ls.stderr.on('data', function (data) {
     console.log('stderr: ' + data);
   });
-
-  ls.on('exit', function (code) {
-    console.log('child process exited with code ' + code);
-  });
 });
-
 
