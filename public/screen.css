@@ -77,10 +77,20 @@ div#main {
   overflow: auto;
 }
 
+div#main p {
+  margin-top:     0;
+  margin-bottom:  3px;
+}
+
+div#main p:hover {
+  background-color: #ccc;
+}
+
+/*
 .wrap_floats:after, .float_container:after, .clear_after:after {
   content: "."; 
   display: block; 
   height: 0; 
   clear: both; 
   visibility: hidden
-}
+}*/
