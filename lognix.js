@@ -6,7 +6,7 @@ var express = require('express'),
     sys     = require('sys'),
     file    = '/var/log/install.log',
     app     = express.createServer(),
-    srcPath = '/Users/joshaven/projects/lognix/'; //'/usr/lib/lognix/';
+    srcPath = '/usr/lib/lognix/'; //'/Users/joshaven/projects/lognix/';
   
 // TODO: fix this srcPath, it should be the path of this file... 
 process.chdir(srcPath)
