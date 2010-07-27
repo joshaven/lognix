@@ -3,13 +3,17 @@ Written nearly entirely in JavaScript... except the little bit of HTML & CSS tha
 
 Contact the Developer: [Joshaven Potter](mailto:yourtech@gmail.com)
 
-View a Screenshot: [view lognix in action](http://skitch.com/joshaven/dqbnh/log-viewer)
+View a Screenshot: [view lognix in action](http://img.skitch.com/20100727-mqgmj7x2puu8dda8n1spwcn9gj.jpg)
 
-# State of this project
-Functional, but not yet fully featured.
 
 ## Installation
-    
+
+If you are running Debian, Ubuntu or compatible then you should be able to simply check this project out and run: 
+
+    git clong git://github.com/joshaven/lognix.git && cd lognix
+    sudo ./debian-install
+
+Otherwise here are the instructions:
     # You must have git, if you don't have git then google 'install git on {insert your machine discription here}'
     
     # Build node (JavaScript interpreter)

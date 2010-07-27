@@ -5,25 +5,27 @@ var express = require('express'),
     fs      = require('fs'),
     sys     = require('sys'),
     file    = '/var/log/install.log',
-    app     = express.createServer();
+    app     = express.createServer(),
+    daemon = require("./daemon");
   
 
 // Listen for requests
 app.listen(3000);
-console.log('Server running at http://127.0.0.1:3000');
+// console.log('Server running at http://127.0.0.1:3000');
+daemon.start();
 
 // Default URL
 app.get('/(index.html?)?', function(req, res){
     var url='/public/index.html',
         req_type = res.contentType(url);
-    console.log(' --> '+req.method+'(HTTP/'+req.httpVersion+') "'+req.url+'" <'+req_type+'>');
+    // console.log(' --> '+req.method+'(HTTP/'+req.httpVersion+') "'+req.url+'" <'+req_type+'>');
     res.send(fs.readFileSync('.'+url, 'utf8'));  
 });
 
 // Respond to any files in the public folder
 app.get('/public/*.*', function(req, res){
   var req_type = res.contentType('.'+req.url);
-  console.log(' --> '+req.method+'(HTTP/'+req.httpVersion+') "'+req.url+'" <'+req_type+'>');
+  // console.log(' --> '+req.method+'(HTTP/'+req.httpVersion+') "'+req.url+'" <'+req_type+'>');
 // TODO: Implement or confirm that TTL's are already implemented...
 //    response['Expires'] = [(Time.now + 20*60).httpdate]  
 // TODO: Change IO to non-blocking method
@@ -36,7 +38,7 @@ app.get('/log/*.log', function(req, res, params){
   var path = '/var'+req.url,
       data = fs.readFileSync(path, 'utf8')
       req_type = res.contentType(data);
-  console.log(' --> '+req.method+'(HTTP/'+req.httpVersion+') "'+req.url+'" <'+req_type+'>');
+  // console.log(' --> '+req.method+'(HTTP/'+req.httpVersion+') "'+req.url+'" <'+req_type+'>');
   res.send( data );
 });
 
@@ -46,7 +48,7 @@ app.get('/log/*.log.json', function(req, res, params){
   var path = '/var'+req.url.split(/\.json/i)[0],
       data = fs.readFileSync(path, 'utf8').split('\n')
       req_type = res.contentType({test:true});
-  console.log(' --> '+req.method+'(HTTP/'+req.httpVersion+') "'+req.url+'" <'+req_type+'>');
+  // console.log(' --> '+req.method+'(HTTP/'+req.httpVersion+') "'+req.url+'" <'+req_type+'>');
   res.send( data );
 });
 
@@ -60,12 +62,12 @@ app.get('/logs', function(req, res){
 
   ls.stdout.on('data', function (data) {
     var req_type = res.contentType('.'+req.url);
-    console.log(' --> '+req.method+'(HTTP/'+req.httpVersion+') "'+req.url+'" <'+req_type+'>');
+    // console.log(' --> '+req.method+'(HTTP/'+req.httpVersion+') "'+req.url+'" <'+req_type+'>');
     res.send( data );
   });
 
   ls.stderr.on('data', function (data) {
-    console.log('stderr: ' + data);
+    // console.log('stderr: ' + data);
   });
 });
 
