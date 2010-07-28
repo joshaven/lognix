@@ -10,14 +10,16 @@ View a Screenshot: [view lognix in action](http://img.skitch.com/20100727-mqgmj7
 
 If you are running Debian, Ubuntu or compatible then you should be able to simply check this project out and run: 
 
-    git clone git://github.com/joshaven/lognix.git && cd lognix
+    git clone git://github.com/joshaven/lognix.git
+    cd lognix
     sudo ./debian-install
 
 Otherwise here are the instructions:
     # You must have git, if you don't have git then google 'install git on {insert your machine discription here}'
     
     # Build node (JavaScript interpreter)
-    git clone http://github.com/ry/node.git && cd node
+    git clone http://github.com/ry/node.git
+    cd node
     ./configure && make
     sudo make install
     
