@@ -4,10 +4,12 @@ var express = require('express'),
     connect = require('connect'),
     fs      = require('fs'),
     sys     = require('sys'),
+    httpTimeOffsetBy = require('./lib/httpTime'),
     file    = '/var/log/install.log',
     app     = express.createServer(),
     srcPath = '/usr/lib/lognix/'; //'/Users/joshaven/projects/lognix/';
-  
+      
+      
 // TODO: fix this srcPath, it should be the path of this file... 
 process.chdir(srcPath)
 
@@ -26,13 +28,10 @@ app.get('/(index.html?)?', function(req, res){
     res.send(fs.readFileSync('.'+url, 'utf8'));  
 });
 
-// Respond to any files in the public folder
+// // Respond to any files in the public folder
 app.get('/public/*.*', function(req, res){
   var req_type = res.contentType('.'+req.url);
-  // console.log(' --> '+req.method+'(HTTP/'+req.httpVersion+') "'+req.url+'" <'+req_type+'>');
-// TODO: Implement or confirm that TTL's are already implemented...
-//    response['Expires'] = [(Time.now + 20*60).httpdate]  
-// TODO: Change IO to non-blocking method
+  res.headers['Expires']=httpTimeOffsetBy(600);
   res.send(fs.readFileSync('.'+req.url, 'utf8'));
 });
 
@@ -74,4 +73,14 @@ app.get('/logs', function(req, res){
     // console.log('stderr: ' + data);
   });
 });
+
+
+
+
+function httpTimeOffsetBy(offsetSeconds){
+ return (new Date((new Date).getTime()+offsetSeconds*1000)).httpDate()
+}
+
+
+
 
