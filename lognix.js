@@ -1,22 +1,15 @@
 // TODO: move the console.log statements to a log function... then log to the console or systemlog based upon log level & environment
+process.chdir(__dirname)
 
 var express = require('express'),
     connect = require('connect'),
     fs      = require('fs'),
     sys     = require('sys'),
-    httpTimeOffsetBy = require('./lib/httpTime'),
-    file    = '/var/log/install.log',
-    app     = express.createServer(),
-    srcPath = '/usr/lib/lognix/'; //'/Users/joshaven/projects/lognix/';
-      
-      
-// TODO: fix this srcPath, it should be the path of this file... 
-process.chdir(srcPath)
-
+    httpDate = require('./lib/httpDate'),
+    app     = express.createServer();
 
 // Listen for requests
 app.listen(3000);
-
 
 console.log('Server running at http://127.0.0.1:3000');
 
@@ -28,10 +21,10 @@ app.get('/(index.html?)?', function(req, res){
     res.send(fs.readFileSync('.'+url, 'utf8'));  
 });
 
-// // Respond to any files in the public folder
+// Respond to any files in the public folder
 app.get('/public/*.*', function(req, res){
   var req_type = res.contentType('.'+req.url);
-  res.headers['Expires']=httpTimeOffsetBy(600);
+  res.headers['Expires']=httpDate.withOffset(600);  // x number of seconds
   res.send(fs.readFileSync('.'+req.url, 'utf8'));
 });
 
@@ -73,14 +66,3 @@ app.get('/logs', function(req, res){
     // console.log('stderr: ' + data);
   });
 });
-
-
-
-
-function httpTimeOffsetBy(offsetSeconds){
- return (new Date((new Date).getTime()+offsetSeconds*1000)).httpDate()
-}
-
-
-
-
