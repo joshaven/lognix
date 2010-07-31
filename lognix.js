@@ -5,8 +5,13 @@ var express = require('express'),
     connect = require('connect'),
     fs      = require('fs'),
     sys     = require('sys'),
-    httpDate = require('./lib/httpDate'),
     app     = express.createServer();
+
+app.configure(function(){
+    app.use(connect.staticProvider(__dirname + '/public'));
+});
+
+// connect.staticProvider(__dirname + '/public')
 
 // Listen for requests
 app.listen(3000);
@@ -21,25 +26,7 @@ app.get('/(index.html?)?', function(req, res){
     res.send(fs.readFileSync('.'+url, 'utf8'));  
 });
 
-// Respond to any files in the public folder
-app.get('/public/*.*', function(req, res){
-  var req_type = res.contentType('.'+req.url);
-  res.headers['Expires']=httpDate.withOffset(600);  // x number of seconds
-  res.send(fs.readFileSync('.'+req.url, 'utf8'));
-});
-
 // View log file
-// TODO: The new line chars are lost... need to do some type of markup
-app.get('/log/*.log', function(req, res, params){
-  var path = '/var'+req.url,
-      data = fs.readFileSync(path, 'utf8')
-      req_type = res.contentType(data);
-  // console.log(' --> '+req.method+'(HTTP/'+req.httpVersion+') "'+req.url+'" <'+req_type+'>');
-  res.send( data );
-});
-
-// View log file
-// TODO: The new line chars are lost... need to do some type of markup
 app.get('/log/*.log.json', function(req, res, params){
   var path = '/var'+req.url.split(/\.json/i)[0],
       data = fs.readFileSync(path, 'utf8').split('\n')
@@ -47,8 +34,6 @@ app.get('/log/*.log.json', function(req, res, params){
   // console.log(' --> '+req.method+'(HTTP/'+req.httpVersion+') "'+req.url+'" <'+req_type+'>');
   res.send( data );
 });
-
-
 
 // List avilable log files
 app.get('/logs', function(req, res){

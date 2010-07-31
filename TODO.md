@@ -1,5 +1,6 @@
 # TODO
 * Add Authentication
+  * look into connect's sessions
 
 ## Consider
 * Branding: (log|conf)nix
