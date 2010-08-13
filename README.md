@@ -32,7 +32,7 @@ Otherwise here are the instructions:
     sudo npm install express
     
     # Download lognix
-    git clong git://github.com/joshaven/lognix.git
+    git clone git://github.com/joshaven/lognix.git
 
     # Run lognix
     cd lognix

@@ -11,8 +11,6 @@ app.configure(function(){
     app.use(connect.staticProvider(__dirname + '/public'));
 });
 
-// connect.staticProvider(__dirname + '/public')
-
 // Listen for requests
 app.listen(3000);
 
