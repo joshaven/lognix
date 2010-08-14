@@ -25,9 +25,9 @@ app.get('/(index.html?)?', function(req, res){
 });
 
 // View log file
-app.get('/log/*.log.json', function(req, res, params){
-  var path = '/var'+req.url.split(/\.json/i)[0],
-      data = fs.readFileSync(path, 'utf8').split('\n')
+app.get(/\/log\/.*[\._]log.json/, function(req, res, params){
+  var path = req.url.split(/\.json/i)[0],
+      data = fs.readFileSync('/var'+path, 'utf8').split('\n')
       req_type = res.contentType({test:true});
   // console.log(' --> '+req.method+'(HTTP/'+req.httpVersion+') "'+req.url+'" <'+req_type+'>');
   res.send( data );
@@ -37,7 +37,7 @@ app.get('/log/*.log.json', function(req, res, params){
 app.get('/logs', function(req, res){
   var sys   = require('sys'),
       spawn = require('child_process').spawn,
-      ls    = spawn('ls', ['/var/log']);
+      ls    = spawn('find', ['/var/log', '-type', 'f']);
 
   ls.stdout.on('data', function (data) {
     var req_type = res.contentType('.'+req.url);

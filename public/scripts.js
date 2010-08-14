@@ -19,9 +19,10 @@ function populate_toc() {
   // Ask the server for all avilable log files
   $.get('/logs', function(data_str) {
     $.each(data_str.split(/\s/), function(i,v){ 
-      if(v.match(/\.log$/)) { 
-        $('<li>'+v+'</li>').click( function(){ 
-          loadDiv('/log/'+v+'.json', '#main'); 
+      var f=v.split('/var/log/')[1];
+      if(v.match(/[\._]log$/)) { 
+        $('<li>'+f+'</li>').click( function(){ 
+          loadDiv('/log/'+f+'.json', '#main'); 
           $('#toc li').removeClass('selected')
           $(this).addClass('selected');
           return false
