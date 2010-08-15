@@ -1,6 +1,9 @@
 # TODO
 * Add Authentication
   * look into connect's sessions
+* Add pagination per url request:  ?firstline=100&lastline=200
+  * Set default pagination to something so that the server time isn't forever long
+* Look into client side data storage, the 
 
 ## Consider
 * Branding: (log|conf)nix
