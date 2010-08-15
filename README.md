@@ -22,15 +22,7 @@ Otherwise here are the instructions:
     cd node
     ./configure && make
     sudo make install
-    
-    # Install NPM (node package manager)
-    git clone http://github.com/isaacs/npm.git
-    sudo make install
-    
-    # Install express (Sinatra inspired node web development framework)
-    sudo npm install connect
-    sudo npm install express
-    
+        
     # Download lognix
     git clone git://github.com/joshaven/lognix.git
 
@@ -41,3 +33,8 @@ Otherwise here are the instructions:
     # Try lognix
     # brows to your ip followed by port 3000   http://127.0.0.1:3000
     # enjoy
+
+    # Optionally you may want to copy lognix to some place like: /usr/local/lib/lognix 
+    # and set it to run as a daemon on system startup.  
+    
+    # Soon there will be the ability to configure this app using a config file, for now you have to edit the lognix.js 

@@ -17,8 +17,8 @@ $(document).ready(function(){
 function populate_toc() {
   $('#toc').html('<ul></ul>');
   // Ask the server for all avilable log files
-  $.get('/logs', function(data_str) {
-    $.each(data_str.split(/\s/), function(i,v){ 
+  $.getJSON('/logs', function(data) {
+    $.each(data.split('\n'), function(i,v){ 
       var f=v.split('/var/log/')[1];
       if(v.match(/[\._]log$/)) { 
         $('<li>'+f+'</li>').click( function(){ 

@@ -1,51 +1,39 @@
 // TODO: move the console.log statements to a log function... then log to the console or systemlog based upon log level & environment
 process.chdir(__dirname)
 
-var express = require('express'),
-    connect = require('connect'),
-    fs      = require('fs'),
+var fs      = require('fs'),
     sys     = require('sys'),
-    app     = express.createServer();
+    exec    = require('child_process').exec,
+    connect = require('./lib/connect'),
+    mime    = require('./lib/connect/utils').mime;
 
-app.configure(function(){
-    app.use(connect.staticProvider(__dirname + '/public'));
-});
+
+function lognix(app) {
+  // View log file
+  app.get(/\/log\/.*[\._]log.json/, function(req, res, params){
+    var path = req.url.split(/\.json/i)[0],
+        data = JSON.stringify(fs.readFileSync('/var'+path, 'utf8').split('\n'));
+    res.writeHead(200, { 'Content-Type':mime.type('.json'), 'Content-Length':data.length });
+    res.end(data);
+  });
+  
+  // List avilable log files
+  app.get('/logs', function(req, res){
+    exec('find /var/log -type f', function(error, stdout, stderr){
+      var str=JSON.stringify(new String(stdout));
+
+      res.writeHead(200, { 'Content-Type':mime.type('.json'), 'Content-Length':str.length });
+      res.end(str);
+    });   
+  });
+};
+
+
 
 // Listen for requests
-app.listen(3000);
+connect.createServer(
+  connect.staticProvider(__dirname + '/public'),
+  connect.router(lognix)
+).listen(3000);
 
 console.log('Server running at http://127.0.0.1:3000');
-
-// Default URL
-app.get('/(index.html?)?', function(req, res){
-    var url='/public/index.html',
-        req_type = res.contentType(url);
-    // console.log(' --> '+req.method+'(HTTP/'+req.httpVersion+') "'+req.url+'" <'+req_type+'>');
-    res.send(fs.readFileSync('.'+url, 'utf8'));  
-});
-
-// View log file
-app.get(/\/log\/.*[\._]log.json/, function(req, res, params){
-  var path = req.url.split(/\.json/i)[0],
-      data = fs.readFileSync('/var'+path, 'utf8').split('\n')
-      req_type = res.contentType({test:true});
-  // console.log(' --> '+req.method+'(HTTP/'+req.httpVersion+') "'+req.url+'" <'+req_type+'>');
-  res.send( data );
-});
-
-// List avilable log files
-app.get('/logs', function(req, res){
-  var sys   = require('sys'),
-      spawn = require('child_process').spawn,
-      ls    = spawn('find', ['/var/log', '-type', 'f']);
-
-  ls.stdout.on('data', function (data) {
-    var req_type = res.contentType('.'+req.url);
-    // console.log(' --> '+req.method+'(HTTP/'+req.httpVersion+') "'+req.url+'" <'+req_type+'>');
-    res.send( data );
-  });
-
-  ls.stderr.on('data', function (data) {
-    // console.log('stderr: ' + data);
-  });
-});

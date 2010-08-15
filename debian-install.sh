@@ -28,25 +28,12 @@ else
   
   echo "Installing node..."
   cd $SRC
-  git clone http://github.com/ry/node.git node && cd node && ./configure && make && make install
+  git clone http://github.com/ry/node.git node; cd node; ./configure && make; make install
   cd $src
 fi
-
-if [ "$(which npm)" ];then 
-  echo "npm installation confirmed"
-else
-  echo "Installing npm"
-  cd $SRC
-  git clone http://github.com/isaacs/npm.git npm && cd npm && sudo make install
-  cd $src
-fi
-
-echo "installing required npm's"
-npm install connect
-npm install express
 
 cd $SRC
-git clone git://github.com/joshaven/lognix.git /usr/lib/lognix
+git clone http://github.com/joshaven/lognix.git /usr/lib/lognix
 
 NODE=$(which node)
 
