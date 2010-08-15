@@ -53,4 +53,7 @@ else
   cp /usr/local/lib/lognix/lognix.init /etc/init.d/lognix
   chmod 655 /etc/init.d/lognix
   update-rc.d lognix defaults
+  /etc/init.d/lognix start
 fi
+
+echo 'The installation has been completed.'
