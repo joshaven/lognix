@@ -8,11 +8,13 @@ View a Screenshot: [view lognix in action](http://img.skitch.com/20100727-mqgmj7
 
 ## Installation
 
-If you are running Debian, Ubuntu or compatible then you should be able to simply check this project out and run: 
+If you are running Debian, Ubuntu or compatible then you should be able to simply download the install 
+script and execute.  The Debian dependencies are: 'apt' if you don't have 'git', init scripts being located 
+in '/etc/init.d' as well using 'update-rc.d' to install and remove System-V style init script links.  If you 
+modify this script to work with other systems then please send the the changes.
 
-    git clone git://github.com/joshaven/lognix.git
-    cd lognix
-    sudo ./debian-install
+    curl -O http://github.com/joshaven/lognix/raw/master/debian-install.sh
+    sudo sh debian-install.sh
 
 Otherwise here are the instructions:
     # You must have git, if you don't have git then google 'install git on {insert your machine discription here}'
